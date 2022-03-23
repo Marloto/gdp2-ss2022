@@ -1,4 +1,3 @@
-
 public class GgtKgv {
 	// ggT
 	// Methoden-Definition
