@@ -19,13 +19,14 @@ public class AccountController {
             while(current == null) {
                 // Add Login Mechanic
             	System.out.print("IBAN: ");
-            	String iban = scanner.next();
+            	String ibanText = scanner.next();
+            	Iban iban = new Iban(ibanText);
             	
             	System.out.print("Pin: ");
             	int pin = scanner.nextInt();
             	
             	for(Account account : accounts) {
-            		if(account.login(iban, pin)) {
+            		if(account.login(iban.getIban(), pin)) {
             			current = account;
             			break;
             		}
@@ -49,17 +50,17 @@ public class AccountController {
             case "deposit":
                 System.out.print("Value: ");
                 double depositeValue = scanner.nextDouble();
-//                current.deposit(depositeValue);
-//                current.print();
+                current.deposit(depositeValue);
+                current.print();
                 break;
             case "withdraw":
                 System.out.print("Value: ");
                 double withdrawValue = scanner.nextDouble();
-//                current.withdraw(withdrawValue);
-//                current.print();
+                current.withdraw(withdrawValue);
+                current.print();
                 break;
             case "logout":
-//                System.out.println("Logout from " + current.getIban());
+                System.out.println("Logout from " + current.getIban());
                 current = null;
                 break;
             case "exit":
