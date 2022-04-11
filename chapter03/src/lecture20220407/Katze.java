@@ -1,3 +1,4 @@
+package lecture20220407;
 
 public class Katze extends Tier {
 	private String other;

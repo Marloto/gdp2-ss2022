@@ -1,6 +1,4 @@
-package example;
-
-import example.Base;
+package lecture20220407.example;
 
 public class Child extends Base {
   public void test() {

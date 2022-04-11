@@ -1,6 +1,6 @@
-package other;
+package lecture20220407.other;
 
-import example.Child;
+import lecture20220407.example.Child;
 
 public class Other {
 	public static void main(String[] args) {

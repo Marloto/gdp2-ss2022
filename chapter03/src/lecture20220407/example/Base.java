@@ -1,4 +1,4 @@
-package example;
+package lecture20220407.example;
 
 public class Base {
   public int a;
