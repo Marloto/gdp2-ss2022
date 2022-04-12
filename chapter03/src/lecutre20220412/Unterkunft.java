@@ -1,5 +1,7 @@
 package lecutre20220412;
 
+import java.util.Arrays;
+
 public class Unterkunft {
 	protected Zimmer[] zimmer;
 	protected Adresse adresse;
@@ -25,11 +27,26 @@ public class Unterkunft {
 	void doSomething(int x) {}
 	void doSomething(int x, int y) {}
 	
-	// Überschreiben
+	
+	
+	
+	// Überschreiben von toString in Unterkunft
 	public String toString() {
-		return "Kein Klassenname!";
+		return "Unterkunft mit " + zimmer.length + 
+				" Zimmern mit dem Namen " + name;
 	}
+//
+//	public String toString() {
+//		return "Unterkunft [zimmer=" + Arrays.toString(zimmer) + ", adresse=" + adresse + ", name=" + name + "]";
+//	}
+	
+	
 
+	
+	
+	
+	
+	
 	public boolean equals(Object obj) {
 		// equals(super); <- kann nicht genutzt werden,
 		// da super keine Referenz im herkömmlichen Sinn!

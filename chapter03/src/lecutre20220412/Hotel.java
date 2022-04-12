@@ -21,6 +21,18 @@ public class Hotel extends Unterkunft {
 		this.setSterne(sterne);
 	}
 	
+	
+	
+	// Überschreiben von toString in Hotel
+	public String toString() {
+		String res = super.toString();
+		// super.super.toString(); keine Verkettung möglich!
+		return res + restaurant.toString() + " hat " + sterne + " Sterne";
+	}
+	
+	
+	
+	
 	public static void main(String[] args) {
 		// durch ... kann mehrfach ein Parameter des entsprechenden Typs
 		// ergänzt werden, wird wie ein Array genutzt
@@ -30,7 +42,33 @@ public class Hotel extends Unterkunft {
 		// if(unterkunft1 == unterkunft2) {} --> false, da unterschiedliche referenzen!
 		// if(unterkunft1.equals(unterkunft2)) {} --> false, da unterschiedliche referenzen und keine
 		//   implementierung von equals vorgesehen ist!
-		System.out.println(unterkunft1.toString());
+		//System.out.println(unterkunft1.toString());
+		
+		Hotel hotel = new Hotel(null, null, 5, null, null);
+		Hotel hotel2 = new Hotel(null, null, 5, null, null);
+		// hotel.equals(hotel2);rückblick
+		
+		Object example = new Motel(null, null, null);
+		
+		if(example instanceof Hotel) {
+			System.out.println("Ist ein Hotel");
+		}
+		if(example instanceof Unterkunft) {
+			System.out.println("Ist ein Unterkunft");
+		}
+		if(example instanceof Restaurant) {
+			System.out.println("Ist ein Restaurant");
+		}
+		
+		Hotel hExample = (Hotel) example;
+	}
+	
+	public boolean equals(Object obj) {
+		if(obj instanceof Hotel) {
+			Hotel hotel = (Hotel) obj;
+			return hotel.name.equals(this.name);
+		}
+		return false;
 	}
 	
 }
