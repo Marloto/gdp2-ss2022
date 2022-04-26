@@ -1,6 +1,6 @@
 package lecture20220426;
 
-public class Student {
+public class Student implements Vergleichbar {
     private String name;
     private int matrikelnummer;
 
@@ -20,4 +20,20 @@ public class Student {
     public int getMatrikelnummer() {
         return matrikelnummer;
     }
+    
+    public boolean istGroesserAls(Vergleichbar vrgl) {
+    	if(vrgl instanceof Student) {
+    		Student st = (Student) vrgl;
+    		return this.matrikelnummer > st.matrikelnummer; 
+    	}
+    	return false;
+    }
 }
+
+
+
+
+
+
+
+

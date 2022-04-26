@@ -1,6 +1,27 @@
 package lecture20220426;
 
 public class Bubblesort {
+    public static void sortieren(Vergleichbar[] zuSortieren) { // was wäre das Array?
+        boolean getauscht = true;
+
+        if (zuSortieren.length <= 1)
+            return;
+
+        while (getauscht) {
+            getauscht = false;
+            for (int i = 0; i < zuSortieren.length - 1; ++i) {
+                //if (zuSortieren[i].getMatrikelnummer() > zuSortieren[i + 1].getMatrikelnummer()) {
+            	if(zuSortieren[i].istGroesserAls(zuSortieren[i + 1])) {
+            		Vergleichbar tmp = zuSortieren[i];
+            		zuSortieren[i] = zuSortieren[i + 1];
+            		zuSortieren[i + 1] = tmp;
+                    getauscht = true;
+                }
+            }
+        }
+    }
+	
+	
     /**
      * Sortiert "studenten" aufsteigend gemäß Bubblesort-Verfahren. Sortiert nach
      * Matrikelnummer.
