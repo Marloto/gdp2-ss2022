@@ -24,62 +24,64 @@ public class SimpleLinkedList<K> implements List<K> {
 		size ++;
 		return true;
 	}
-	
-	private Element<K> find(Object value) {
-		
-		// wie finden wir das Element ausgehend von first oder last?
-		// -> iteration über die Elemente
-		// -> while solange next != null
-		Element<K> cur = first; // falls leere liste, ist first null
-		while(cur != null) {
-			if(cur.getValue().equals(value)) {
-				return cur;
-			}
-			cur = cur.getNext();
-		}
-		return null;
-	}
+    
+    private Element<K> find(Object value) {
+        Element<K> cur = first;
+        while(cur != null) {
+            if(cur.getValue().equals(value)) {
+                return cur;
+            }
+            cur = cur.getNext();
+        }
+        return null;
+    }
+    
+    private Element<K> find(int index) {
+        Element<K> cur = first;
+        int i = 0;
+        while(cur != null) {
+            if(i == index) {
+                return cur;
+            }
+            cur = cur.getNext();
+        }
+        return null;
+    }
 	
 	public boolean remove(Object value) {
 		Element<K> find = find(value);
-		
-		// was wäre notwendig?
-		// -> referenz finden
-		// -> next und previous korrigieren
-		// gibt es sonderfälle?
-		// -> liste leer
-		// -> letztes Objekt
-		// -> ersten Objekt
-		
     	if(find != null) {
-    		size --;
-    		// Element is first -or- Element is first and last 
-    		if(first == find) {
-    			Element<K> next = first.getNext();
-    			// Remove reference to old previous
-    			if(next != null) {    				
-    				next.setPrevious(null);
-    			}
-    			first = next;
-    			if(last == find) {
-    				last = next;
-    			}
-    		// Element is last
-    		} else if(last == find) {
-    			Element<K> previous = last.getPrevious();
-    			previous.setNext(null);
-    			last = previous;
-    		// Somewhere inbetween
-    		} else {
-    			Element<K> previous = find.getPrevious(); //should be != null, because not root
-    			Element<K> next = find.getNext(); //should be != null, because not last
-    			previous.setNext(next);
-    			next.setPrevious(previous);
-    		}
+    		remove(find);
     	}
-		
 		return true;
 	}
+
+    private void remove(Element<K> find) {
+        size --;
+        // Element is first -or- Element is first and last 
+        if(first == find) {
+        	Element<K> next = first.getNext();
+        	// Remove reference to old previous
+        	if(next != null) {    				
+        		next.setPrevious(null);
+        	}
+        	first = next;
+        	if(last == find) {
+        		last = next;
+        	}
+        // Element is last
+        } else if(last == find) {
+        	Element<K> previous = last.getPrevious();
+        	previous.setNext(null);
+        	last = previous;
+        // Somewhere inbetween
+        } else {
+        	Element<K> previous = find.getPrevious(); //should be != null, because not root
+        	Element<K> next = find.getNext(); //should be != null, because not last
+        	previous.setNext(next);
+        	next.setPrevious(previous);
+        }
+    }
 	
 	public K getFirst() {
 		return first.getValue();
@@ -131,92 +133,143 @@ public class SimpleLinkedList<K> implements List<K> {
 		return list;
 	}
 
-	@Override
 	public boolean containsAll(Collection<?> c) {
-		return false;
+	    for(Object o : c) {
+	        if(!this.contains(o)) {
+	            return false;
+	        }
+	    }
+		return true;
 	}
 
-	@Override
 	public boolean addAll(Collection<? extends K> c) {
-		return false;
+	    boolean added = true;
+	    for(K element : c) {
+	        added = this.add(element) && added;
+	    }
+		return added;
 	}
 
-	@Override
 	public boolean addAll(int index, Collection<? extends K> c) {
-		return false;
+	    return false;
 	}
 
-	@Override
 	public boolean removeAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+        boolean removed = true;
+        for(Object element : c) {
+            removed = this.remove(element) && removed;
+        }
+        return removed;
 	}
 
-	@Override
 	public boolean retainAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+	    boolean removed = true;
+        for(Object element : c) {
+            if(!this.contains(element)) {
+                this.remove(element);
+            }
+        }
+        return removed;
 	}
 
-	@Override
 	public void clear() {
 		first = null;
 		last = null;
 		size = 0;
 	}
 
-	@Override
 	public K get(int index) {
-		return null;
+	    Element<K> find = this.find(index);
+		return find != null ? find.getValue() : null;
 	}
 
-	@Override
 	public K set(int index, K element) {
-		// TODO Auto-generated method stub
-		return null;
+	    Element<K> old = this.find(index);
+	    this.add(index, element);
+	    this.remove(old);
+	    return old != null ? old.getValue() : null;
 	}
 
-	@Override
 	public void add(int index, K element) {
-		// TODO Auto-generated method stub
-		
+        Element<K> newElement = new Element<K>(element);
+        Element<K> find = this.find(index); // gets previous
+        if(find != null) {
+            Element<K> previous = find.getPrevious();
+            newElement.setNext(find);
+            find.setPrevious(newElement);
+            newElement.setPrevious(previous);
+            if(previous != null) {
+                previous.setNext(newElement);
+            }
+            if(first == find) {
+                first = newElement;
+            }
+        } else if(last != null) {
+            newElement.setPrevious(last);
+            last.setNext(newElement);
+            last = newElement;
+        } else {
+            first = newElement;
+            last = newElement;
+        }
 	}
 
-	@Override
 	public K remove(int index) {
-		// TODO Auto-generated method stub
+	    Element<K> find = this.find(index);
+	    if(find != null) {
+	        this.remove(find);
+	        return find.getValue();
+	    }
 		return null;
 	}
 
-	@Override
-	public int indexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int indexOf(Object value) {
+	    Element<K> cur = first;
+	    int i = 0;
+        while(cur != null) {
+            if(cur.getValue().equals(value)) {
+                return i;
+            }
+            cur = cur.getNext();
+            i ++;
+        }
+        return -1;
 	}
 
-	@Override
-	public int lastIndexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int lastIndexOf(Object value) {
+        Element<K> cur = last;
+        int i = 0;
+        while(cur != null) {
+            if(cur.getValue().equals(value)) {
+                return i;
+            }
+            cur = cur.getPrevious();
+            i ++;
+        }
+        return -1;
 	}
 
-	@Override
-	public ListIterator<K> listIterator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ListIterator<K> listIterator(int index) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<K> subList(int fromIndex, int toIndex) {
-		// TODO Auto-generated method stub
-		return null;
+	    Element<K> cur = this.find(fromIndex);
+	    Element<K> end = this.find(toIndex);
+	    SimpleLinkedList<K> list = new SimpleLinkedList<>();
+	    while(cur != null) {
+	        list.add(cur.getValue());
+	        if(cur == end) {
+	            break;
+	        }
+	        cur = cur.getNext();
+	    }
+		return list;
 	}
+
+    public ListIterator<K> listIterator() {
+        throw new RuntimeException("Not implemented yet...");
+    }
+
+    public ListIterator<K> listIterator(int index) {
+        throw new RuntimeException("Not implemented yet...");
+    }
 }
 
 
