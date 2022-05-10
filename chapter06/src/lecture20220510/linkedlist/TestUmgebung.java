@@ -1,4 +1,4 @@
-package lecture20220505;
+package lecture20220510.linkedlist;
 
 public class TestUmgebung {
 	public static void main(String[] args) {
@@ -13,7 +13,7 @@ public class TestUmgebung {
 		list.remove("Test2");
 		
 		// Iterable<E> und Iterator<E>!
-//		for(String wert : list) {
-//		}
+		for(String wert : list) {
+		}
 	}
 }
