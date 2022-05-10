@@ -107,8 +107,7 @@ public class SimpleLinkedList<K> implements List<K> {
 	}
 
 	public Iterator<K> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SimpleLinkedListIterator<K>(first);
 	}
 
 	public Object[] toArray() {
