@@ -1,4 +1,4 @@
-package lecture12052022;
+package lecture20220512;
 
 public class SomeExample {
     private String msg;
