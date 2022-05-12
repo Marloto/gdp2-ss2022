@@ -21,4 +21,5 @@ public class Randomizer implements Iterable<Double> {
 	public Iterator<Double> iterator() {
 		return null;
 	}
+	
 }
