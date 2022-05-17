@@ -9,7 +9,8 @@ public class SomeExample {
     }
     
     private void print() {
-        System.out.println(msg);
+        //System.out.println(msg);
+    	throw new RuntimeException("Immer!");
     }
 
     public static void doSomething(String msg) {
@@ -17,6 +18,10 @@ public class SomeExample {
     }
     
     public static void main(String[] args) {
-        doSomething("Hello, World!");
+    	try {    		
+    		doSomething("Hello, World!");
+    	} catch(RuntimeException exc) {
+    		exc.printStackTrace();
+    	}
     }
 }
