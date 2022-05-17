@@ -43,7 +43,7 @@ public class PlayList {
 			}
 		}
 		
-		// Dateien schreiben mittels FileWriter in einem try-catch-close-block
+		// Dateien schreiben mittels FileWriter in einem try-catch-ressource-block
 		try (FileWriter fileWriter2 = new FileWriter("playlist2.m3u")) {
 			fileWriter2.write("Hello, World!"); // <- implementierung des Algo.
 		} catch (IOException e) {
