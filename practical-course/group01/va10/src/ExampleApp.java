@@ -30,6 +30,15 @@ public class ExampleApp extends Application {
 			}
 		}
 	}
+	
+	// PlayList list = new PlayList();
+	
+	private void setPlayList(String path) {
+		// 1. Input path == null ist -> default liste laden... und achten Sie darauf
+		//    das die Abspielposition zurückgesetzt wird!
+		// 2. Eine PlayList unterschiedlich lang, auch hier abspielposition!
+		// list.loadFromM3U(path);
+	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
