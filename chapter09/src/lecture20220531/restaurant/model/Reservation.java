@@ -1,6 +1,6 @@
 package lecture20220531.restaurant.model;
 
-public class Reservation {
+public class Reservation implements Comparable<Reservation> {
 
     private String name;
     private String date;
@@ -20,6 +20,13 @@ public class Reservation {
     
     public String toString() {
         return this.date + " " + this.name;
+    }
+    
+    public int compareTo(Reservation o) {
+    	if(o == null) {
+    		return 1;
+    	}
+    	return date.compareTo(o.date);
     }
 
     public int hashCode() {
