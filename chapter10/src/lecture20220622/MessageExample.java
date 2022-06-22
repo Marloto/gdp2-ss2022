@@ -61,7 +61,14 @@ public class MessageExample {
 
     public static void handleList2(List<String> messages) {
          // ... ohne Lambda-Ausdrücke?
-        
+        for(String line : messages) {
+            String[] parts = line.split(":");
+            Message m = new Message(Long.valueOf(parts[0]), parts[1]);
+            if(last == null || last.getTime() < m.getTime()) {
+                last = m;
+                System.out.println(m.toString());
+            }
+        }
     }
 
 }
