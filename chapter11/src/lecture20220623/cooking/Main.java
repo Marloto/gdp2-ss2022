@@ -27,9 +27,9 @@ public class Main {
         Chef chef3 = new Chef("Inge", orders);
         
         // Aktivieren Sie folgende Zeilen, um die Köche arbeiten zu lassen
-        // chef1.start(); 
-        // chef2.start(); 
-        // chef3.start(); 
+        chef1.start(); 
+        chef2.start(); 
+        chef3.start(); 
         
         waitUntilFinished(orders, new Chef[] {chef1, chef2, chef3});
     }
