@@ -1,4 +1,4 @@
-package lecture20220602;
+package lecture20220608;
 
 public class LambdaCase {
     public static void main(String[] args) {

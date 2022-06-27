@@ -1,4 +1,4 @@
-package lecture20220602;
+package lecture20220608;
 
 public class AnonymousInnerClassCase {
     public static void main(String[] args) {

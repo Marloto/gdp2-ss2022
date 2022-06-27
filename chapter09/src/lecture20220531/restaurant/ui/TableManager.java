@@ -107,14 +107,12 @@ public class TableManager extends Application {
     	addReservation = new Button("Add");
     	dateField = new TextField();
     	nameField = new TextField();
-    	addReservation.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				if(current != null) {					
-					Reservation res = new Reservation(dateField.getText(), nameField.getText());
-					current.addReservation(res);
-				}
-				refreshUi();
+    	addReservation.setOnAction((event) -> {
+			if(current != null) {					
+				Reservation res = new Reservation(dateField.getText(), nameField.getText());
+				current.addReservation(res);
 			}
+			refreshUi();
 		});
     	
     	addArticle = new Button("Add");
