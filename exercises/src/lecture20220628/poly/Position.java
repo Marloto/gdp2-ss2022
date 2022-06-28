@@ -52,5 +52,19 @@ public class Position {
 	public String toString() {
 		return x + "/" + y;
 	}
+	
+	public static void main(String[] args) {
+		Position position = new Position(10, 0);
+		Position position2 = position.add(new Position(10, 0));
+		double distanceTo = position2.distanceTo(position);
+		System.out.println(distanceTo);
+	}
 
 }
+
+
+
+
+
+
+
