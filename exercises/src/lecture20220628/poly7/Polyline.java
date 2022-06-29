@@ -1,4 +1,4 @@
-package lecture20220628.poly;
+package lecture20220628.poly7;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,20 +12,6 @@ public class Polyline implements Iterable<Position> {
 	
 	public Iterator<Position> iterator() {
 		 return positions.iterator();
-	}
-	
-	public Iterable<Position> iterator(double length) {
-		//return new PolylinePartIterator(length, positions);
-		
-		// return new PolylinePart(length, this);
-		
-		//return () -> new PolylinePartIterator(length, positions);
-		
-		return new Iterable<Position>() {
-			public Iterator<Position> iterator() {
-				return new PolylinePartIterator(length, positions);
-			}
-		};
 	}
 	
 	public Polyline() {
@@ -55,25 +41,11 @@ public class Polyline implements Iterable<Position> {
 	}
 	
 	public Polyline stopAfter(double f) {
+		Iterable<Position> it = () -> new PolylinePartIterator(f, this.positions); 
+		
 		Polyline polyline = new Polyline();
-		if(this.positions.size() < 1) {
-			return polyline;
-		}
-		polyline.add(this.positions.get(0));
-		for(int i = 1; i < this.positions.size(); i ++) {
-			Position a = this.positions.get(i - 1);
-			Position b = this.positions.get(i);
-			double distanceTo = a.distanceTo(b);
-			if(distanceTo > f) {
-				polyline.add(b.sub(a).normalize().mul(f).add(a));
-				break;
-			} else {
-				polyline.add(b);
-				f -= distanceTo;
-				if(f == 0) {
-					break;
-				}
-			}
+		for(Position p : it) {
+		    polyline.add(p);
 		}
 		return polyline;
 	}

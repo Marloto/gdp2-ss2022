@@ -1,4 +1,4 @@
-package lecture20220628.poly;
+package lecture20220628.poly6;
 
 import java.util.Iterator;
 

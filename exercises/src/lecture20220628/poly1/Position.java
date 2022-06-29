@@ -1,4 +1,4 @@
-package lecture20220628.poly;
+package lecture20220628.poly1;
 
 public class Position {
 	private final double x;
